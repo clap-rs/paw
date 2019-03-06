@@ -1,4 +1,4 @@
-# silver
+# paw
 [![crates.io version][1]][2] [![build status][3]][4]
 [![downloads][5]][6] [![docs.rs docs][7]][8]
 
@@ -16,7 +16,7 @@ __Basic usage__
 
 ## Installation
 ```sh
-$ cargo add silver
+$ cargo add paw
 ```
 
 ## Safety
@@ -36,16 +36,16 @@ None.
 ## License
 [MIT](./LICENSE-MIT) OR [Apache-2.0](./LICENSE-APACHE)
 
-[1]: https://img.shields.io/crates/v/silver.svg?style=flat-square
-[2]: https://crates.io/crates/silver
-[3]: https://img.shields.io/travis/yoshuawuyts/silver/master.svg?style=flat-square
-[4]: https://travis-ci.org/yoshuawuyts/silver
-[5]: https://img.shields.io/crates/d/silver.svg?style=flat-square
-[6]: https://crates.io/crates/silver
+[1]: https://img.shields.io/crates/v/paw.svg?style=flat-square
+[2]: https://crates.io/crates/paw
+[3]: https://img.shields.io/travis/yoshuawuyts/paw/master.svg?style=flat-square
+[4]: https://travis-ci.org/yoshuawuyts/paw
+[5]: https://img.shields.io/crates/d/paw.svg?style=flat-square
+[6]: https://crates.io/crates/paw
 [7]: https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square
-[8]: https://docs.rs/silver
+[8]: https://docs.rs/paw
 
-[releases]: https://github.com/yoshuawuyts/silver/releases
-[contributing]: https://github.com/yoshuawuyts/silver/blob/master.github/CONTRIBUTING.md
-[good-first-issue]: https://github.com/yoshuawuyts/silver/labels/good%20first%20issue
-[help-wanted]: https://github.com/yoshuawuyts/silver/labels/help%20wanted
+[releases]: https://github.com/yoshuawuyts/paw/releases
+[contributing]: https://github.com/yoshuawuyts/paw/blob/master.github/CONTRIBUTING.md
+[good-first-issue]: https://github.com/yoshuawuyts/paw/labels/good%20first%20issue
+[help-wanted]: https://github.com/yoshuawuyts/paw/labels/help%20wanted

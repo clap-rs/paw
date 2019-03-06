@@ -1,9 +1,9 @@
 [package]
-name = "silver"
+name = "paw"
 version = "0.0.0"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/yoshuawuyts/silver"
-documentation = "https://docs.rs/silver"
+repository = "https://github.com/yoshuawuyts/paw"
+documentation = "https://docs.rs/paw"
 description = "CLI argument parser."
 keywords = ["cli", "parser", "main", "macro"]
 categories = ["command-line-interface", "command-line-utilities", "parsing", "rust-patterns"]

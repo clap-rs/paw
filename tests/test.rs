@@ -1,4 +1,4 @@
-extern crate silver;
+extern crate paw;
 extern crate failure;
 
 use failure::Error;
