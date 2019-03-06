@@ -16,7 +16,7 @@ use paw::prelude::*;
 #[paw_clap(verbosity, log, port)]
 struct Args;
 
-#[arg_main]
+#[main_args]
 fn main(args: Args) -> Result<(), failure::Error> {
   let mut listener = args.listener()?;
   for stream in listener.incoming() {
