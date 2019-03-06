@@ -2,7 +2,7 @@
 [![crates.io version][1]][2] [![build status][3]][4]
 [![downloads][5]][6] [![docs.rs docs][7]][8]
 
-CLI argument parser.
+Command line argument paw-rser.
 
 - [Documentation][8]
 - [Crates.io][2]
@@ -11,7 +11,18 @@ CLI argument parser.
 ## Examples
 __Basic usage__
 ```rust
-// tbi
+use paw::prelude::*;
+
+#[paw_clap(verbosity, log, port)]
+struct Args;
+
+#[arg_main]
+fn main(args: Args) -> Result<(), failure::Error> {
+  let mut listener = args.listener()?;
+  for stream in listener.incoming() {
+    /* */
+  }
+}
 ```
 
 ## Installation
