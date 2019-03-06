@@ -1,0 +1,17 @@
+[package]
+name = "silver"
+version = "1.0.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yoshuawuyts/silver"
+documentation = "https://docs.rs/silver"
+description = "CLI argument parser."
+keywords = ["cli", "parser", "main", "macro"]
+categories = ["command-line-interface", "command-line-utilities", "parsing", "rust-patterns"]
+authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
+readme = "README.md"
+edition = "2018"
+
+[dependencies]
+failure = "0.1.5"
+
+[dev-dependencies]
