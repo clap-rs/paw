@@ -11,17 +11,15 @@ Command line argument paw-rser.
 ## Examples
 __Basic usage__
 ```rust
-use paw::prelude::*;
-
 #[paw_clap(verbosity, log, port)]
 struct Args;
 
-#[main_args]
+#[paw::main]
 fn main(args: Args) -> Result<(), failure::Error> {
-  let mut listener = args.listener()?;
-  for stream in listener.incoming() {
-    /* */
-  }
+    let mut listener = args.listener()?;
+    for stream in listener.incoming() {
+        stream.write(b"hello world!")?;
+    }
 }
 ```
 

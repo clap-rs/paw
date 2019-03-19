@@ -7,7 +7,7 @@ documentation = "https://docs.rs/paw"
 description = "CLI argument parser."
 keywords = ["cli", "parser", "main", "macro"]
 categories = ["command-line-interface", "command-line-utilities", "parsing", "rust-patterns"]
-authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
+authors = ["The Rust CLI Working Group"]
 readme = "README.md"
 edition = "2018"
 
