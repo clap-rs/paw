@@ -2,7 +2,7 @@
 name = "paw"
 version = "0.0.0"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/yoshuawuyts/paw"
+repository = "https://github.com/rust-cli/paw"
 documentation = "https://docs.rs/paw"
 description = "CLI argument parser."
 keywords = ["cli", "parser", "main", "macro"]
@@ -12,8 +12,11 @@ readme = "README.md"
 edition = "2018"
 
 [dependencies]
-failure = "0.1.5"
-clap = "2.32.0"
-clap_flags = "0.3.0"
+paw-attributes = { path = "paw-attributes" }
 
-[dev-dependencies]
+[workspace]
+members = [
+  ".",
+  "paw-attributes",
+  "paw-clap",
+]
