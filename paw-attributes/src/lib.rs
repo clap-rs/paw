@@ -56,7 +56,7 @@ pub fn main(attr: TokenStream, item: TokenStream) -> TokenStream {
 
                     main(&pat.parse())
                 }
-                fn __validate(arg: &impl PawTrait) -> #ty {
+                fn __validate(arg: &impl paw::TryParse) -> #ty {
                 }
             }
         }
