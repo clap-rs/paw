@@ -14,6 +14,10 @@ edition = "2018"
 [dependencies]
 paw-attributes = { path = "paw-attributes" }
 
+[dev-dependencies]
+paw-clap = { path = "paw-clap", version = "0.0.0" }
+structopt = "0.2.15"
+
 [workspace]
 members = [
   ".",
