@@ -14,13 +14,10 @@
 pub use paw_attributes::main;
 
 /// Try parsing.
-pub trait TryParse {
-    /// Item returned.
-    type Item;
-
+pub trait TryParse: Sized {
     /// Error type.
     type Error;
 
     /// Try to parse an input to a type.
-    fn try_parse() -> Result<Self::Item, Self::Error>;
+    fn try_parse() -> Result<Self, Self::Error>;
 }

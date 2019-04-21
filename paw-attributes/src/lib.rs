@@ -21,7 +21,14 @@ pub fn main(attr: TokenStream, item: TokenStream) -> TokenStream {
 
     if name != "main" {
         let tokens = quote_spanned! { name.span() =>
-            compile_error!("only the main function can be tagged with #[paw::main]");
+            compile_error!("only fn main can be tagged with #[paw::main]");
+        };
+        return TokenStream::from(tokens);
+    }
+
+    if let syn::ReturnType::Default = ret {
+        let tokens = quote_spanned! { name.span() =>
+            compile_error!("fn main must specify a return type");
         };
         return TokenStream::from(tokens);
     }
@@ -45,19 +52,14 @@ pub fn main(attr: TokenStream, item: TokenStream) -> TokenStream {
                     return TokenStream::from(tokens);
                 }
             };
-            let pat = &arg.pat;
-            let ty = &arg.ty;
+            let arg_name = &arg.pat;
+            let arg_type = &arg.ty;
             quote! {
                 #asyncness fn main() #ret {
-                    __validate(&pat);
-                    fn main (#pat: #ty::Item) {
-                        #body
-                    }
+                    let #arg_name = <#arg_type as paw::TryParse>::try_parse()?;
+                    #body
+                }
 
-                    main(&pat.parse())
-                }
-                fn __validate(arg: &impl paw::TryParse) -> #ty {
-                }
             }
         }
         _ => {

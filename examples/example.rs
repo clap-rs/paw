@@ -1,21 +1,23 @@
+use std::io::prelude::*;
 use std::net::TcpListener;
 
 struct Args {
-    port: usize,
+    port: u16,
 }
 
 impl paw::TryParse for Args {
-    type Item = Self;
     type Error = std::io::Error;
-    fn try_parse() -> Result<Self::Item, Self::Error> {
+    fn try_parse() -> Result<Self, Self::Error> {
         Ok(Self { port: 8080 })
     }
 }
 
 #[paw::main]
 fn main(args: Args) -> Result<(), std::io::Error> {
-    let mut listener = TcpListener::accept(("127.0.0.1", args.port));
+    let listener = TcpListener::bind(("127.0.0.1", args.port))?;
+    println!("listening on {}", listener.local_addr()?);
     for stream in listener.incoming() {
-        stream.write(b"hello world!")?;
+        stream?.write(b"hello world!")?;
     }
+    Ok(())
 }
