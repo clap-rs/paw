@@ -11,7 +11,7 @@ use quote::{quote, quote_spanned};
 use syn::spanned::Spanned;
 
 #[proc_macro_attribute]
-pub fn main(attr: TokenStream, item: TokenStream) -> TokenStream {
+pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(item as syn::ItemFn);
 
     let ret = &input.decl.output;
