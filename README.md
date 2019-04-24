@@ -19,20 +19,24 @@ paw makes command line parsing feel first-class
 ## Examples
 __Listen on a port__
 ```rust
+use std::io::prelude::*;
 use std::net::TcpListener;
 
-#[paw_clap]
+#[derive(paw_clap::Paw, structopt::StructOpt)]
 struct Args {
-    /// The port to listen on.
-    port: usize,
-};
+    /// Port to listen on.
+    #[structopt(default_value = "8080")]
+    port: u16,
+}
 
 #[paw::main]
-fn main(args: Args) -> Result<(), failure::Error> {
-    let mut listener = TcpListener::accept(("127.0.0.1", args.port))
+fn main(args: Args) -> Result<(), std::io::Error> {
+    let listener = TcpListener::bind(("127.0.0.1", args.port))?;
+    println!("listening on {}", listener.local_addr()?);
     for stream in listener.incoming() {
-        stream.write(b"hello world!")?;
+        stream?.write(b"hello world!")?;
     }
+    Ok(())
 }
 ```
 
