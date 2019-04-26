@@ -20,8 +20,7 @@ fn main(args: paw::Args) -> Result<(), Box<dyn Error>> {
     let port = iter
         .next()
         .ok_or_else(|| ArgNotFoundError { arg: "port".into() })?;
-
-    dbg!(&port);
+    
     let listener = TcpListener::bind(("127.0.0.1", port.parse()?))?;
     println!("listening on {}", listener.local_addr()?);
     for stream in listener.incoming() {
