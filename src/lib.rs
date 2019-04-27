@@ -13,8 +13,8 @@
 //! remember which methods to call in order to parse arguments in the CLI. Instead
 //! paw makes command line parsing feel first-class
 //!
-//! ## Example
-//!
+//! ## Examples
+//! __Create a parser from scratch__
 //! ```rust
 //! use std::io::{self, prelude::*};
 //! use std::net::TcpListener;

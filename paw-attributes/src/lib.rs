@@ -28,12 +28,10 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
         return TokenStream::from(tokens);
     }
 
-    if let syn::ReturnType::Default = ret {
-        let tokens = quote_spanned! { name.span() =>
-            compile_error!("fn main must specify a return type");
-        };
-        return TokenStream::from(tokens);
-    }
+    let end = match ret {
+        syn::ReturnType::Default => quote!{.unwrap()},
+        _ => quote!{?},
+    };
 
     let inputs = &input.decl.inputs;
     let result = match inputs.len() {
@@ -58,7 +56,7 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
             let arg_type = &arg.ty;
             quote! {
                 #asyncness fn main() #ret {
-                    let #arg_name = <#arg_type as paw::ParseArgs>::parse_args()?;
+                    let #arg_name = <#arg_type as paw::ParseArgs>::parse_args()#end;
                     #body
                 }
 
