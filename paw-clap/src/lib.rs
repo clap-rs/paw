@@ -15,7 +15,7 @@ pub fn paw(input: TokenStream) -> TokenStream {
     let name = &input.ident;
 
     let result = quote! {
-        impl paw::TryParse for #name {
+        impl paw::ParseArgs for #name {
             /// Error type.
             type Error = std::io::Error;
 

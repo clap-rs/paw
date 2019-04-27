@@ -56,7 +56,7 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
             let arg_type = &arg.ty;
             quote! {
                 #asyncness fn main() #ret {
-                    let #arg_name = <#arg_type as paw::TryParse>::try_parse()?;
+                    let #arg_name = <#arg_type as paw::ParseArgs>::try_parse()?;
                     #body
                 }
 

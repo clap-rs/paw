@@ -5,7 +5,7 @@ struct Args {
     port: u16,
 }
 
-impl paw::TryParse for Args {
+impl paw::ParseArgs for Args {
     type Error = std::io::Error;
     fn try_parse() -> Result<Self, Self::Error> {
         Ok(Self { port: 8080 })

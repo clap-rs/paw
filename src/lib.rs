@@ -27,14 +27,14 @@ impl Iterator for Args {
     }
 }
 
-impl TryParse for Args {
+impl ParseArgs for Args {
     type Error = std::io::Error;
     fn try_parse() -> Result<Self, Self::Error> {
         Ok(Self(std::env::args()))
     }
 }
 /// Try parsing.
-pub trait TryParse: Sized {
+pub trait ParseArgs: Sized {
     /// Error type.
     type Error;
 
