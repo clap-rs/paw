@@ -1,26 +1,28 @@
 use std::error::Error;
-use std::io::prelude::*;
+use std::io::{self, prelude::*};
 use std::net::TcpListener;
 
-/// To run this example (e.g. with port 8080):
-///
+/// To run this example do:
 /// ```sh
-/// $ cargo run --example new_type -- --port 8080
+/// $ cargo run --example args -- localhost 8080
 /// ```
 
 #[paw::main]
 fn main(args: paw::Args) -> Result<(), Box<dyn Error>> {
-    // Rust reads the arguments to the process as an env::Args which is
-    // an iterator over strings. It contains the arguments as strings if
-    // they are separated by space. Ensure you give the argument as --port 8080
-    // and not --port=8080 in this case.
+    let mut args = args.skip(1);
 
-    let mut iter = args.0.skip_while(|e| e != "--port").skip(1);
-    let port = iter
+    let host = args
         .next()
-        .ok_or_else(|| paw::ArgNotFoundError { arg: "port".into() })?;
-    let listener = TcpListener::bind(("127.0.0.1", port.parse()?))?;
+        .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "the host argument is missing"))?;
+
+    let port = args
+        .next()
+        .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "the port argument is missing"))?
+        .parse()?;
+
+    let listener = TcpListener::bind((host.as_str(), port))?;
     println!("listening on {}", listener.local_addr()?);
+
     for stream in listener.incoming() {
         stream?.write(b"hello world!")?;
     }

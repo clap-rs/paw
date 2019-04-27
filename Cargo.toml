@@ -12,7 +12,8 @@ readme = "README.md"
 edition = "2018"
 
 [dependencies]
-paw-attributes = { path = "paw-attributes" }
+paw-attributes = { path = "paw-attributes", version = "0.0.0" }
+paw-raw = { path = "paw-raw", version = "0.0.0" }
 
 [dev-dependencies]
 paw-clap = { path = "paw-clap", version = "0.0.0" }
@@ -23,4 +24,5 @@ members = [
   ".",
   "paw-attributes",
   "paw-clap",
+  "paw-raw",
 ]
