@@ -20,7 +20,7 @@ pub fn paw(input: TokenStream) -> TokenStream {
             type Error = std::io::Error;
 
             /// Try to parse an input to a type.
-            fn try_parse() -> Result<Self, Self::Error> {
+            fn parse_args() -> Result<Self, Self::Error> {
                 Ok(<#name as structopt::StructOpt>::from_args())
             }
         }

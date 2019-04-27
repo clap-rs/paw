@@ -3,16 +3,54 @@
 #![warn(missing_docs)]
 #![cfg_attr(test, deny(warnings))]
 
-//!  Command line argument paw-rser abstraction for main.
+//! Command line argument paw-rser abstraction for main.
+//!
 //! ## Example
 //!
 //! ```rust
+//! use std::io::{self, prelude::*};
+//! use std::net::TcpListener;
+//!
+//! struct Args {
+//!     port: u16,
+//!     address: String,
+//! }
+//!
+//! #[paw::main]
+//! fn main(args: Args) -> Result<(), Box<dyn std::error::Error>> {
+//!     let listener = TcpListener::bind((args.address.as_str(), args.port))?;
+//!     println!("listening on {}", listener.local_addr()?);
+//!
+//!     for stream in listener.incoming() {
+//!         stream?.write(b"hello world!")?;
+//!     }
+//!     Ok(())
+//! }
+//!
+//! impl paw::ParseArgs for Args {
+//!     type Error = Box<dyn std::error::Error>;
+//!
+//!     fn parse_args() -> Result<Self, Self::Error> {
+//!         let mut args = std::env::args().skip(1);
+//!
+//!         let address = args
+//!             .next()
+//!             .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "the address arg is missing"))?;
+//!
+//!         let port = args
+//!             .next()
+//!             .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "the port arg is missing"))?
+//!             .parse()?;
+//!
+//!         Ok(Self { address, port })
+//!     }
+//! }
 //! ```
 
 use std::env::{Args as StdArgs, ArgsOs as StdArgsOs};
-use std::iter::Iterator;
 use std::ffi::OsString;
 use std::fmt;
+use std::iter::Iterator;
 
 #[doc(inline)]
 #[cfg(not(test))] // NOTE: exporting main breaks tests, we should file an issue.
@@ -47,7 +85,9 @@ impl Iterator for Args {
 }
 
 impl ExactSizeIterator for Args {
-    fn len(&self) -> usize { self.inner.len() }
+    fn len(&self) -> usize {
+        self.inner.len()
+    }
 }
 
 impl DoubleEndedIterator for Args {
@@ -58,8 +98,10 @@ impl DoubleEndedIterator for Args {
 
 impl ParseArgs for Args {
     type Error = std::io::Error;
-    fn try_parse() -> Result<Self, Self::Error> {
-        Ok(Self { inner: std::env::args() })
+    fn parse_args() -> Result<Self, Self::Error> {
+        Ok(Self {
+            inner: std::env::args(),
+        })
     }
 }
 
@@ -89,7 +131,9 @@ impl Iterator for ArgsOs {
 }
 
 impl ExactSizeIterator for ArgsOs {
-    fn len(&self) -> usize { self.inner.len() }
+    fn len(&self) -> usize {
+        self.inner.len()
+    }
 }
 
 impl DoubleEndedIterator for ArgsOs {
@@ -100,7 +144,9 @@ impl DoubleEndedIterator for ArgsOs {
 
 impl ParseArgs for ArgsOs {
     type Error = std::io::Error;
-    fn try_parse() -> Result<Self, Self::Error> {
-        Ok(Self { inner: std::env::args_os() })
+    fn parse_args() -> Result<Self, Self::Error> {
+        Ok(Self {
+            inner: std::env::args_os(),
+        })
     }
 }

@@ -12,5 +12,5 @@ pub trait ParseArgs: Sized {
     /// Try to create a new instance of the struct.
     ///
     /// Returns a `Result` of either an instance of `Self`, or the associated `Error` type.
-    fn try_parse() -> Result<Self, Self::Error>;
+    fn parse_args() -> Result<Self, Self::Error>;
 }
