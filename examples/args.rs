@@ -15,8 +15,7 @@ fn main(args: paw::Args) -> Result<(), Box<dyn Error>> {
     // they are separated by space. Ensure you give the argument as --port 8080
     // and not --port=8080 in this case.
 
-    let mut iter = args.0.skip_while(|e| e != "--port");
-    iter.next();
+    let mut iter = args.0.skip_while(|e| e != "--port").skip(1);
     let port = iter
         .next()
         .ok_or_else(|| paw::ArgNotFoundError { arg: "port".into() })?;

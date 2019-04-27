@@ -17,9 +17,3 @@ fn main(args: Args) -> Result<(), std::io::Error> {
     }
     Ok(())
 }
-
-async fn main(args: Args) throw {
-    let mut app = Tide::default();
-    app.on("/").get(async || "hello world");
-    await app.serve()
-}
