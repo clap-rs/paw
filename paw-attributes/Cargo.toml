@@ -1,7 +1,15 @@
 [package]
 name = "paw-attributes"
-version = "0.0.0"
-authors = ["The Rust CLI Working Group"]
+description = "Proc Macro attributes for the Paw crate."
+version = "0.3.0-alpha.2"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/rust-cli/paw"
+homepage = "https://github.com/rust-cli/paw"
+documentation = "https://docs.rs/paw-attributes"
+authors = ["The CLI Working Group"]
+keywords = ["paw", "parser", "cli", "macro", "proc-macro"]
+categories = ["command-line-interface", "command-line-utilities", "parsing"]
 edition = "2018"
 
 [lib]

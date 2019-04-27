@@ -1,4 +1,6 @@
-//! Structopt adapter for the Paw crate.
+//! Structopt adapter for the [Paw crate].
+//!
+//! [Paw crate]: https://docs.rs/paw
 //!
 //! ## Examples
 //! ```

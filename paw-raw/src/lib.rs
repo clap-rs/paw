@@ -1,4 +1,6 @@
-//! Traits for the Paw crate.
+//! Traits for the [Paw crate].
+//!
+//! [Paw crate]: https://docs.rs/paw
 
 #![warn(missing_debug_implementations, nonstandard_style, rust_2018_idioms)]
 
