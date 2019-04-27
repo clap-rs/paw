@@ -4,7 +4,7 @@ use std::net::TcpListener;
 #[derive(paw_clap::Paw, structopt::StructOpt)]
 struct Args {
     /// Port to listen on.
-    #[structopt(default_value = "8080")]
+    #[structopt(short = "p", long = "port", env = "PORT", default_value = "8080")]
     port: u16,
 }
 
@@ -16,4 +16,10 @@ fn main(args: Args) -> Result<(), std::io::Error> {
         stream?.write(b"hello world!")?;
     }
     Ok(())
+}
+
+async fn main(args: Args) throw {
+    let mut app = Tide::default();
+    app.on("/").get(async || "hello world");
+    await app.serve()
 }

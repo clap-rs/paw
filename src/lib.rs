@@ -45,7 +45,7 @@ pub trait TryParse: Sized {
 #[derive(Debug)]
 /// An error which is returned when an argument isn't passed to the process
 pub struct ArgNotFoundError {
-    arg: String,
+    pub arg: String,
 }
 
 impl std::fmt::Display for ArgNotFoundError {
