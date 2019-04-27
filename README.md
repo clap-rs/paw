@@ -58,6 +58,11 @@ impl paw::ParseArgs for Args {
 }
 ```
 
+To start the server do:
+```sh
+$ cargo run --example scratch -- localhost 8080
+```
+
 ## Installation
 ```sh
 $ cargo add paw

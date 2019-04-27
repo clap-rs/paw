@@ -5,6 +5,14 @@
 
 //! Command line argument paw-rser abstraction for main.
 //!
+//! Paw's goal is to show that C's idea of passing arguments into main wasn't that
+//! bad at all, but just needed a bit of oxidation to make it work with Rust.
+//!
+//! Paw defines a trait, a proc macro, and an example implementation that when
+//! combined allow you to pass fully parsed arguments to main. Gone is the need to
+//! remember which methods to call in order to parse arguments in the CLI. Instead
+//! paw makes command line parsing feel first-class
+//!
 //! ## Example
 //!
 //! ```rust
@@ -46,6 +54,16 @@
 //!     }
 //! }
 //! ```
+//!
+//! To start the server do:
+//! ```sh
+//! $ cargo run --example scratch -- localhost 8080
+//! ```
+//!
+//! __More Examples__
+//! - [Scratch](https://github.com/rust-cli/paw/tree/master/examples/scratch.rs)
+//! - [Args](https://github.com/rust-cli/paw/tree/master/examples/args.rs)
+//! - [Structopt](https://github.com/rust-cli/paw/tree/master/examples/structopt.rs)
 
 use std::env::{Args as StdArgs, ArgsOs as StdArgsOs};
 use std::ffi::OsString;

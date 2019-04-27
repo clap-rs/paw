@@ -1,5 +1,5 @@
 [package]
-name = "paw-clap"
+name = "paw-structopt"
 version = "0.0.0"
 authors = ["The Rust CLI Working Group"]
 edition = "2018"
