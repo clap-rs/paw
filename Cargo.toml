@@ -18,6 +18,7 @@ paw-raw = { path = "paw-raw", version = "0.0.0" }
 [dev-dependencies]
 paw-structopt = { path = "paw-structopt", version = "0.0.0" }
 structopt = "0.2.15"
+runtime = "0.3.0-alpha.2"
 
 [workspace]
 members = [
@@ -26,3 +27,6 @@ members = [
   "paw-structopt",
   "paw-raw",
 ]
+
+[patch.crates-io]
+runtime-attributes = { path = "../../rustasync/runtime/runtime-attributes"}

@@ -20,6 +20,7 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let name = &input.ident;
     let body = &input.block;
     let asyncness = &input.asyncness;
+    let attrs = &input.attrs;
 
     if name != "main" {
         let tokens = quote_spanned! { name.span() =>
@@ -29,14 +30,24 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
     }
 
     let end = match ret {
-        syn::ReturnType::Default => quote!{.unwrap()},
-        _ => quote!{?},
+        syn::ReturnType::Default => quote! {.unwrap()},
+        _ => quote! {?},
     };
+
+    for attr in attrs {
+        for segment in &attr.path.segments {
+            let attr_name = format!("{}", &segment.ident);
+            if attr_name == "runtime" {
+                // panic!()
+            }
+        }
+    }
 
     let inputs = &input.decl.inputs;
     let result = match inputs.len() {
         0 => {
             quote! {
+                #(#attrs)*
                 #asyncness fn main() #ret {
                     #body
                 }
@@ -55,6 +66,7 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
             let arg_name = &arg.pat;
             let arg_type = &arg.ty;
             quote! {
+                #(#attrs)*
                 #asyncness fn main() #ret {
                     let #arg_name = <#arg_type as paw::ParseArgs>::parse_args()#end;
                     #body
