@@ -34,15 +34,6 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
         _ => quote! {?},
     };
 
-    for attr in attrs {
-        for segment in &attr.path.segments {
-            let attr_name = format!("{}", &segment.ident);
-            if attr_name == "runtime" {
-                // panic!()
-            }
-        }
-    }
-
     let inputs = &input.decl.inputs;
     let result = match inputs.len() {
         0 => {
