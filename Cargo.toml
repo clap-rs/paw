@@ -27,6 +27,3 @@ members = [
   "paw-structopt",
   "paw-raw",
 ]
-
-[patch.crates-io]
-runtime-attributes = { path = "../../rustasync/runtime/runtime-attributes"}

@@ -19,6 +19,3 @@ proc-macro = true
 syn = { version = "0.15.30", features = ["full", "extra-traits"] }
 proc-macro2 = { version = "0.4.24", features = ["nightly"] }
 quote = "0.6"
-
-[patch.crates-io]
-runtime-attributes = { path = "../../rustasync/runtime/runtime-attributes"}
