@@ -1,0 +1,15 @@
+[package]
+name = "paw-raw"
+description = "Traits to implement custom Paw implementations"
+version = "0.0.0"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/rust-cli/paw"
+homepage = "https://github.com/rust-cli/paw"
+documentation = "https://docs.rs/paw-raw"
+authors = ["The CLI Working Group"]
+keywords = ["paw", "parser", "cli"]
+categories = ["command-line-interface", "command-line-utilities", "parsing"]
+edition = "2018"
+
+[dependencies]

@@ -1,4 +1,6 @@
-//! Macros for the paw crate.
+//! Macros for the [Paw crate].
+//!
+//! [Paw crate]: https://docs.rs/paw
 
 #![forbid(unsafe_code, future_incompatible, rust_2018_idioms)]
 #![deny(missing_debug_implementations, nonstandard_style)]
@@ -18,6 +20,7 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let name = &input.ident;
     let body = &input.block;
     let asyncness = &input.asyncness;
+    let attrs = &input.attrs;
 
     if name != "main" {
         let tokens = quote_spanned! { name.span() =>
@@ -26,17 +29,16 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
         return TokenStream::from(tokens);
     }
 
-    if let syn::ReturnType::Default = ret {
-        let tokens = quote_spanned! { name.span() =>
-            compile_error!("fn main must specify a return type");
-        };
-        return TokenStream::from(tokens);
-    }
+    let end = match ret {
+        syn::ReturnType::Default => quote! {.unwrap()},
+        _ => quote! {?},
+    };
 
     let inputs = &input.decl.inputs;
     let result = match inputs.len() {
         0 => {
             quote! {
+                #(#attrs)*
                 #asyncness fn main() #ret {
                     #body
                 }
@@ -55,8 +57,9 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
             let arg_name = &arg.pat;
             let arg_type = &arg.ty;
             quote! {
+                #(#attrs)*
                 #asyncness fn main() #ret {
-                    let #arg_name = <#arg_type as paw::ParseArgs>::try_parse()?;
+                    let #arg_name = <#arg_type as paw::ParseArgs>::parse_args()#end;
                     #body
                 }
 

@@ -17,28 +17,19 @@ paw makes command line parsing feel first-class
 - [Releases][releases]
 
 ## Examples
-__Listen on a port__
 ```rust
-use std::io::prelude::*;
-use std::net::TcpListener;
-
-#[derive(paw_clap::Paw, structopt::StructOpt)]
-struct Args {
-    /// Port to listen on.
-    #[structopt(default_value = "8080")]
-    port: u16,
-}
-
 #[paw::main]
-fn main(args: Args) -> Result<(), std::io::Error> {
-    let listener = TcpListener::bind(("127.0.0.1", args.port))?;
-    println!("listening on {}", listener.local_addr()?);
-    for stream in listener.incoming() {
-        stream?.write(b"hello world!")?;
+fn main(args: paw::Args) {
+    for arg in args {
+        println!("{:?}", arg);
     }
-    Ok(())
 }
 ```
+
+__More Examples__
+- [Scratch](https://github.com/rust-cli/paw/tree/master/examples/scratch.rs)
+- [Args](https://github.com/rust-cli/paw/tree/master/examples/args.rs)
+- [Structopt](https://github.com/rust-cli/paw/tree/master/examples/structopt.rs)
 
 ## Installation
 ```sh
@@ -56,14 +47,41 @@ look at some of these issues:
 - [Issues labeled "good first issue"][good-first-issue]
 - [Issues labeled "help wanted"][help-wanted]
 
-## References
-None.
-
 ## FAQ
+### How does paw work?
+The `paw::main` attribute allows `fn main` to take any argument that implements the `paw::ParseArgs`
+trait. `paw::ParseArgs` implements one method: `parse_args` which returns a `Result<Self>`.
+
+Any errors that are generated are returned back from `fn main`, and the returned `Result` type is in
+control of how to print them.
+
+### What is the relationship to C?
+In C's runtime, arguments command line arguments are passed as a combination of "number of
+arguments" (`argc`), and a "list of arguments" (`argv`):
+```c
+int main(int argc, char **argv) {
+    for(i = 1; i < argc; i++) {
+        printf("%s",argv[i]);
+    }
+    return 0;
+}
+```
+
+In Rust this would translate to an iterator of arguments, which is what
+[`std::env::Args`](https://doc.rust-lang.org/std/env/struct.Args.html) provides, which is wrapped in
+`paw` through [`paw::Args`](https://docs.rs/paw/target/doc/paw/struct.Args.html).
+
 ### What's the future for paw?
-It's currently just an experiment. But if this turns out to be something that
-works really well for people, it's not out of the question that we might look to
-standardize it. But that's a big if. Until then: we hope you enjoy Paw!
+Paw is an experiment by the CLI WG to provide a better command line experience for everyone. Our
+hypothesis is that by moving command line parsing to `fn main` Rust's command line experience can
+become more intuitive and easy to use.
+
+We hope to gather feedback how this works for people, and see how we can integrate with existing
+libraries. This will take time, and we might change things in the process.
+
+If this experiment proves to be successful, we might move to formalize the features Paw provide into
+Rust itself through the RFC process. But that's not the case yet, so for now: we hope you enjoy Paw,
+and we'd love to hear your about your experiences using it!
 
 ## License
 [MIT](./LICENSE-MIT) OR [Apache-2.0](./LICENSE-APACHE)
