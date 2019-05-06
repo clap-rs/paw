@@ -12,7 +12,7 @@ readme = "README.md"
 edition = "2018"
 
 [dependencies]
-paw-attributes = { path = "paw-attributes", version = "0.0.0" }
+paw-attributes = { path = "paw-attributes", version = "1.0.0" }
 paw-raw = { path = "paw-raw", version = "0.0.0" }
 
 [dev-dependencies]
