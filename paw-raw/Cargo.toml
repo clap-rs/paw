@@ -1,7 +1,7 @@
 [package]
 name = "paw-raw"
 description = "Traits to implement custom Paw implementations"
-version = "0.0.0"
+version = "1.0.0"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/rust-cli/paw"
