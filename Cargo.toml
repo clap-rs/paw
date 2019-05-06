@@ -16,7 +16,7 @@ paw-attributes = { path = "paw-attributes", version = "1.0.0" }
 paw-raw = { path = "paw-raw", version = "1.0.0" }
 
 [dev-dependencies]
-paw-structopt = { path = "paw-structopt", version = "0.0.0" }
+paw-structopt = { path = "paw-structopt", version = "1.0.0" }
 structopt = "0.2.15"
 runtime = "0.3.0-alpha.2"
 
