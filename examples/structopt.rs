@@ -13,7 +13,7 @@ struct Args {
 
 #[paw::main]
 fn main(args: Args) -> Result<(), std::io::Error> {
-    let listener = TcpListener::bind((args.address.as_str(), args.port))?;
+    let listener = TcpListener::bind((&*args.address, args.port))?;
     println!("listening on {}", listener.local_addr()?);
     for stream in listener.incoming() {
         stream?.write(b"hello world!")?;

@@ -1,4 +1,8 @@
 # paw-structopt
+## Paw support was added to structopt in [#192](https://github.com/TeXitoi/structopt/pull/192)
+behind the `"paw"` feature flag. This crate is no longer required, and has been deprecated
+accordingly.
+
 [Structopt](http://docs.rs/structopt) support for the [Paw](https://github.com/rust-cli/paw) crate.
 See the [Paw](https://docs.rs/paw) documentation for more details.
 
