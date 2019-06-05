@@ -1,7 +1,8 @@
 use std::io::prelude::*;
 use std::net::TcpListener;
 
-#[derive(paw_structopt::StructOpt, structopt::StructOpt)]
+// With the "paw" feature enabled in structopt
+#[derive(structopt::StructOpt)]
 struct Args {
     /// Port to listen on.
     #[structopt(short = "p", long = "port", env = "PORT", default_value = "8080")]
