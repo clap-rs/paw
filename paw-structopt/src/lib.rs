@@ -44,10 +44,8 @@ pub fn structopt(input: TokenStream) -> TokenStream {
 
     let result = quote! {
         impl paw::ParseArgs for #name {
-            /// Error type.
             type Error = std::io::Error;
 
-            /// Try to parse an input to a type.
             fn parse_args() -> Result<Self, Self::Error> {
                 Ok(<#name as structopt::StructOpt>::from_args())
             }

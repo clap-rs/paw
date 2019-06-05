@@ -1,6 +1,6 @@
 [package]
 name = "paw"
-version = "0.0.0"
+version = "1.0.0"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-cli/paw"
 documentation = "https://docs.rs/paw"
@@ -12,12 +12,11 @@ readme = "README.md"
 edition = "2018"
 
 [dependencies]
-paw-attributes = { path = "paw-attributes", version = "0.0.0" }
-paw-raw = { path = "paw-raw", version = "0.0.0" }
+paw-attributes = { path = "paw-attributes", version = "1.0.0" }
+paw-raw = { path = "paw-raw", version = "1.0.0" }
 
 [dev-dependencies]
-paw-structopt = { path = "paw-structopt", version = "0.0.0" }
-structopt = "0.2.15"
+structopt = { version = "0.2.17", features = ["paw"] }
 runtime = "0.3.0-alpha.2"
 
 [workspace]
