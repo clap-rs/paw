@@ -16,10 +16,10 @@ use syn::spanned::Spanned;
 pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(item as syn::ItemFn);
 
-    let ret = &input.decl.output;
-    let name = &input.ident;
+    let ret = &input.sig.output;
+    let name = &input.sig.ident;
     let body = &input.block;
-    let asyncness = &input.asyncness;
+    let asyncness = &input.sig.asyncness;
     let attrs = &input.attrs;
 
     if name != "main" {
@@ -34,7 +34,7 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
         _ => quote! {?},
     };
 
-    let inputs = &input.decl.inputs;
+    let inputs = &input.sig.inputs;
     let result = match inputs.len() {
         0 => {
             quote! {
@@ -45,8 +45,8 @@ pub fn main(_attr: TokenStream, item: TokenStream) -> TokenStream {
             }
         }
         1 => {
-            let arg = match inputs.first().unwrap().into_value() {
-                syn::FnArg::Captured(arg) => arg,
+            let arg = match inputs.first().unwrap() {
+                syn::FnArg::Typed(arg) => arg,
                 _ => {
                     let tokens = quote_spanned! { inputs.span() =>
                         compile_error!("fn main should take a fully formed argument");
